@@ -35,8 +35,16 @@ async def on_shutdown(bot: Bot):
     logger.info("shutting down webhook")
     await bot.delete_webhook()
 
+async def handle_root(_: web.Request):
+    return web.Response(text="Hey cool to see you")
+
 async def main():
     app = web.Application()
+
+    app.add_routes([
+        web.get('/', handle_root)
+    ])
+
     webhook_requests_handler = SimpleRequestHandler(
         dispatcher=dp,
         bot=bot,
