@@ -23,7 +23,7 @@ dp = Dispatcher()
 @dp.message()
 async def cmd_start(message: types.Message):
     logger.info(str(message.new_chat_members) + ' ' + str(message.left_chat_member))
-    if not message.new_chat_members is None and not message.left_chat_member is None:
+    if message.new_chat_members is None and message.left_chat_member is None:
         return
     logger.info("Removing message!!! chat id is " + str(message.chat.id))
     await message.delete()
